@@ -30,13 +30,13 @@ class ToastView: UIView {
     }
     
     private func setup() {
-        //self.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.alpha = 0
         
         if Toast.appearance.blur {
             let blurEffect = UIBlurEffect(style: Toast.appearance.blurStyle)
             blurEffectView = UIVisualEffectView(effect: blurEffect)
-            //blurEffectView?.setTranslatesAutoresizingMaskIntoConstraints(false)
+            blurEffectView?.translatesAutoresizingMaskIntoConstraints = false
             blurEffectView?.layer.cornerRadius = 5
             blurEffectView?.clipsToBounds = true
             
@@ -46,7 +46,7 @@ class ToastView: UIView {
         textLabel = UILabel()
         textLabel?.textColor = Toast.appearance.textColor
         textLabel?.numberOfLines = 0
-        //textLabel?.setTranslatesAutoresizingMaskIntoConstraints(false)
+        textLabel?.translatesAutoresizingMaskIntoConstraints = false
         
         self.addSubview(textLabel!)
     }
