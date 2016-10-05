@@ -22,18 +22,18 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func showDark(sender: AnyObject) {
-        Toast.appearance.blurStyle = .Dark
-        Toast.appearance.textColor = UIColor.whiteColor()
+    @IBAction func showDark(_ sender: AnyObject) {
+        Toast.appearance.blurStyle = .dark
+        Toast.appearance.textColor = UIColor.white
         
-        Toast.makeText(textField.text, duration: Toast.LENGTH_SHORT).show()
+        Toast.makeText(textField.text!, duration: Toast.LENGTH_SHORT).show()
     }
     
-    @IBAction func showLight(sender: AnyObject) {
-        Toast.appearance.blurStyle = .ExtraLight
-        Toast.appearance.textColor = UIColor.darkGrayColor()
+    @IBAction func showLight(_ sender: AnyObject) {
+        Toast.appearance.blurStyle = .extraLight
+        Toast.appearance.textColor = UIColor.darkGray
         
-        Toast.makeText(textField.text, duration: Toast.LENGTH_SHORT).show()
+        Toast.makeText(textField.text!, duration: Toast.LENGTH_SHORT).show()
     }
 }
 

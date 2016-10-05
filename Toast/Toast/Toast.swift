@@ -8,15 +8,15 @@
 
 import Foundation
 
-public class Toast {
-    public static let LENGTH_SHORT: Double = 2
-    public static let LENGTH_LONG: Double = 5
+open class Toast {
+    open static let LENGTH_SHORT: Double = 2
+    open static let LENGTH_LONG: Double = 5
     
     /// Shared toast appearance settings
-    public static let appearance = ToastAppearance()
+    open static let appearance = ToastAppearance()
     
     /// Shared keyboard observer used to determine appropriate toast position
-    private static var keyboardObserver: KeyboardObserver?
+    fileprivate static var keyboardObserver: KeyboardObserver?
     
     var text: String!
     var duration: Double!
@@ -28,7 +28,7 @@ public class Toast {
     
         :returns: Void
     */
-    public class func initKeyboardObserver() -> Void {
+    open class func initKeyboardObserver() -> Void {
         Toast.keyboardObserver = KeyboardObserver()
     }
     
@@ -40,7 +40,7 @@ public class Toast {
         
         :returns: Toast
     */
-    public class func makeText(text: String, duration: Double = Toast.LENGTH_LONG) -> Toast {
+    open class func makeText(_ text: String, duration: Double = Toast.LENGTH_LONG) -> Toast {
         let toast = Toast()
         
         toast.text = text
@@ -54,8 +54,8 @@ public class Toast {
     
         :returns: Void
     */
-    public func show() -> Void {
-        let keyWindow = UIApplication.sharedApplication().keyWindow
+    open func show() -> Void {
+        let keyWindow = UIApplication.shared.keyWindow
         
         if let windowView = keyWindow?.subviews.first as UIView? {
             toast = ToastView()
@@ -73,15 +73,15 @@ public class Toast {
             
             windowView.addSubview(toast)
             
-            let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[toast]-\(yMargin)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
-            let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-(>=\(margin))-[toast]-(>=\(margin))-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
-            let centerContraint = NSLayoutConstraint(item: toast, attribute: .CenterX, relatedBy: .Equal, toItem: windowView, attribute: .CenterX, multiplier: 1, constant: 0)
+            let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[toast]-\(yMargin)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+            let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=\(margin))-[toast]-(>=\(margin))-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+            let centerContraint = NSLayoutConstraint(item: toast, attribute: .centerX, relatedBy: .equal, toItem: windowView, attribute: .centerX, multiplier: 1, constant: 0)
             
             windowView.addConstraints(verticalConstraints)
             windowView.addConstraints(horizontalConstraints)
             windowView.addConstraint(centerContraint)
 
-            UIView.animateWithDuration(Toast.appearance.animationDuration, animations: { () -> Void in
+            UIView.animate(withDuration: Toast.appearance.animationDuration, animations: { () -> Void in
                 self.toast.alpha = 1
             })
             
@@ -94,12 +94,12 @@ public class Toast {
     
         :returns: Void
     */
-    public func hide() -> Void {
-        UIView.animateWithDuration(Toast.appearance.animationDuration, animations: { () -> Void in
+    open func hide() -> Void {
+        UIView.animate(withDuration: Toast.appearance.animationDuration, animations: { () -> Void in
             self.toast.alpha = 0
-        }) { (_) -> Void in
+        }, completion: { (_) -> Void in
             self.remove()
-        }
+        }) 
     }
     
     /**
@@ -109,10 +109,10 @@ public class Toast {
     
         :returns: Void
     */
-    public func delayHide(delay: Double) -> Void {
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
+    open func delayHide(_ delay: Double) -> Void {
+        let delayTime = DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
             self.hide()
         }
     }
@@ -123,7 +123,7 @@ public class Toast {
     
         :returns: Void
     */
-    public func remove() -> Void {
+    open func remove() -> Void {
         self.toast.removeFromSuperview()
     }
 }

@@ -14,23 +14,23 @@ class KeyboardObserver: NSObject {
     required override init() {
         super.init()
         
-        let nc = NSNotificationCenter.defaultCenter()
+        let nc = NotificationCenter.default
         
-        nc.addObserver(self, selector: "keyboardDidAppear:", name: UIKeyboardDidShowNotification, object: nil)
-        nc.addObserver(self, selector: "keyboardDidDisappear:", name: UIKeyboardDidHideNotification, object: nil)
+        nc.addObserver(self, selector: #selector(KeyboardObserver.keyboardDidAppear(_:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        nc.addObserver(self, selector: #selector(KeyboardObserver.keyboardDidDisappear(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
     }
     
-    func keyboardDidAppear(notification: NSNotification) -> Void {
-        let info = notification.userInfo
+    func keyboardDidAppear(_ notification: Notification) -> Void {
+        let info = (notification as NSNotification).userInfo
         let keyboardFrame = info?[UIKeyboardFrameBeginUserInfoKey] as? NSValue
-        let keyboardSize = keyboardFrame?.CGRectValue().size
+        let keyboardSize = keyboardFrame?.cgRectValue.size
         
         if let kS = keyboardSize {
             offset = kS.height
         }
     }
     
-    func keyboardDidDisappear(notification: NSNotification) -> Void {
+    func keyboardDidDisappear(_ notification: Notification) -> Void {
         offset = 0
     }
 }
