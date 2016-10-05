@@ -8,25 +8,25 @@
 
 import Foundation
 
-public class ToastAppearance {
+open class ToastAppearance {
     /// Whether or not the toast background should have a blurred background
-    public var blur: Bool = true
+    open var blur: Bool = true
     
     /// Blur style if blur is set to true
-    public var blurStyle: UIBlurEffectStyle = .Dark
+    open var blurStyle: UIBlurEffectStyle = .dark
     
     /// Toast background corner radius
-    public var cornerRadius: CGFloat = 4
+    open var cornerRadius: CGFloat = 4
     
     /// Margin between the toast and the surrounding view
-    public var margin: CGFloat = 16
+    open var margin: CGFloat = 16
     
     /// Padding between the text label and the toast background
-    public var padding: CGFloat = 10
+    open var padding: CGFloat = 10
     
     /// The label text color
-    public var textColor: UIColor = UIColor.whiteColor()
+    open var textColor: UIColor = UIColor.white
     
     /// The duration of the fade in animation
-    public var animationDuration: NSTimeInterval = 0.5
+    open var animationDuration: TimeInterval = 0.5
 }

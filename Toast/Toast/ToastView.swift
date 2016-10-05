@@ -12,10 +12,10 @@ class ToastView: UIView {
     var blurEffectView: UIVisualEffectView?
     var textLabel: UILabel?
     
-    private var constraintsSet: Bool = false
+    fileprivate var constraintsSet: Bool = false
     
     required init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         setup()
     }
     
@@ -29,7 +29,7 @@ class ToastView: UIView {
         setup()
     }
     
-    private func setup() {
+    fileprivate func setup() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.alpha = 0
         
@@ -57,8 +57,8 @@ class ToastView: UIView {
             
             var views: [String: AnyObject] = ["label": textLabel!]
             
-            let horizontalMargin = NSLayoutConstraint.constraintsWithVisualFormat("H:|-\(padding)-[label]-\(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
-            let verticalMargin = NSLayoutConstraint.constraintsWithVisualFormat("V:|-\(padding)-[label]-\(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+            let horizontalMargin = NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(padding)-[label]-\(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+            let verticalMargin = NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(padding)-[label]-\(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
             
             self.addConstraints(horizontalMargin)
             self.addConstraints(verticalMargin)
@@ -66,8 +66,8 @@ class ToastView: UIView {
             if blurEffectView != nil {
                 views["blur"] = blurEffectView!
                 
-                let blurWidthConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:|[blur]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
-                let blurHeightContraint = NSLayoutConstraint.constraintsWithVisualFormat("V:|[blur]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+                let blurWidthConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[blur]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+                let blurHeightContraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|[blur]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
                 
                 self.addConstraints(blurWidthConstraint)
                 self.addConstraints(blurHeightContraint)
